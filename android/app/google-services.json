@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "330423581255",
+    "project_id": "xmovie-5ab60",
+    "storage_bucket": "xmovie-5ab60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330423581255:android:5b7029a49ed741af3c4f62",
+        "android_client_info": {
+          "package_name": "com.xmovie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330423581255-1o58thq6l05iq3s9md293p5r76c97gb1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xmovie",
+            "certificate_hash": "25c6bf3482d074ff5fa937f112b1a681d17f96c5"
+          }
+        },
+        {
+          "client_id": "330423581255-3t3nai6rssvqi13bdl7rai0jqr5qubeo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK4GFs8UTknMYOBGtS1PsN0Oz6Ex1rVPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330423581255-3t3nai6rssvqi13bdl7rai0jqr5qubeo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
