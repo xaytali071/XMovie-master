@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xmovie/view/components/style.dart';
 
-import 'button/custom_social_button.dart';
+import '../button/custom_social_button.dart';
 
 class CustomSocialMedia extends StatelessWidget {
   const CustomSocialMedia({super.key});
@@ -19,8 +19,8 @@ class CustomSocialMedia extends StatelessWidget {
   }
 
   launchTelegram() async {
-    var nativeUrl = "t.me/+SMuXyZO-Dec3ODZi";
-    var webUrl = "https://t.me/+SMuXyZO-Dec3ODZi";
+    var nativeUrl = "t.me/+lL3w8LjOHrc5NTli";
+    var webUrl = "https://t.me/+lL3w8LjOHrc5NTli";
 
     try {
       await launchUrlString(nativeUrl, mode: LaunchMode.externalApplication);
@@ -64,50 +64,50 @@ class CustomSocialMedia extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomSocialButton(
+          onTap: () {},
+          height: 35,
+          width: 70,
           child: SvgPicture.asset(
             "assets/you_tube.svg",
             color: Style.greyColor,
             height: 20.r,
           ),
-          onTap: () {},
-          height: 35,
-          width: 70,
         ),
         CustomSocialButton(
-          child: Icon(
-            Icons.telegram,
-            size: 30.r,
-            color: Style.greyColor,
-          ),
           onTap: () {
             launchTelegram();
           },
           width: 70,
           height: 35,
-        ),
-        CustomSocialButton(
           child: Icon(
-            Icons.facebook,
+            Icons.telegram,
             size: 30.r,
             color: Style.greyColor,
           ),
+        ),
+        CustomSocialButton(
           onTap: () {
             launchFaceBook();
           },
           width: 70,
           height: 35,
+          child: Icon(
+            Icons.facebook,
+            size: 30.r,
+            color: Style.greyColor,
+          ),
         ),
         CustomSocialButton(
-          child: SvgPicture.asset(
-            "assets/instagram.svg",
-            color: Style.greyColor,
-            height: 20.r,
-          ),
           onTap: () {
             launchInstagram();
           },
           height: 35,
           width: 70,
+          child: SvgPicture.asset(
+            "assets/instagram.svg",
+            color: Style.greyColor,
+            height: 20.r,
+          ),
         ),
       ],
     );

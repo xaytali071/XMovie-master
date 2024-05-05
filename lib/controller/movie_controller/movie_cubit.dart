@@ -34,15 +34,23 @@ class MovieCubit extends Cubit<MovieState> {
     emit(state.copyWith(listOfMovie: listOfMovies,listOfDocId: listOfDocId,isLoading: false));
   }
 
-  getCast({required String docId,required String collectionName}) async {
+  getCastMovie({required String docId,required String collectionName,}) async {
     emit(state.copyWith(isLoading: true));
     List<CastModel> list = [];
-    var res = await firestore.collection(collectionName).doc(docId).collection("casts").get();
+    var res = await firestore.collection(collectionName).doc(docId).get();
+    MovieModel actor=await MovieModel.fromJson(res.data(),);
     list.clear();
-    for (var element in res.docs) {
-      list.add(CastModel.fromJson(element.data()));
+    for (int i=0;i<(actor.actorsId?.length ?? 0);i++) {
+      list.add(await getActorsWithid(actor.actorsId?[i] ?? ""));
     }
     emit(state.copyWith(listOfCast: list, isLoading: false));
+  }
+
+  getActorsWithid(String id) async {
+    emit(state.copyWith(isLoading: true));
+    var res=await firestore.collection("casts").doc(id).get();
+    CastModel cast=CastModel.fromJson(res.data(), res.id);
+    return cast;
   }
 
 

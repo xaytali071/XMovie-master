@@ -1,15 +1,14 @@
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:xmovie/app_const.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/movie_controller/movie_cubit.dart';
 import 'package:xmovie/controller/movie_controller/movie_state.dart';
 import 'package:xmovie/model/local_storage.dart';
 import 'package:xmovie/model/rating_model.dart';
-import 'package:xmovie/view/components/button/custom_button.dart';
 import 'package:xmovie/view/components/button/custom_social_button.dart';
 import 'package:xmovie/view/components/form_field/keyboard_dissimer.dart';
-import 'package:xmovie/view/components/rating_bar.dart';
+import 'package:xmovie/view/components/widgets/rating_bar.dart';
 import 'package:xmovie/view/components/style.dart';
+import 'package:xmovie/view/pages/auth/login_page.dart';
 import 'package:xmovie/view/pages/auth/sign_up_page.dart';
 import 'package:xmovie/view/pages/chats/coment_widget.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +92,7 @@ class _CommentsPageState extends State<CommentsPage>
                                       name: widget.movie?.movieName ?? "",
                                       image: widget.movie?.movieImage ?? "",
                                       title:
-                                          "${widget.movie?.movieName ?? ""}");
+                                          widget.movie?.movieName ?? "");
                                 },
                                 child: const Icon(
                                   Icons.share,
@@ -143,14 +142,14 @@ class _CommentsPageState extends State<CommentsPage>
                                                         0)),
                                             5.horizontalSpace,
                                             Text(
-                                              "${((widget.movie?.rating?.toDouble() ?? 0) / (widget.movie?.userIdList?.length ?? 0)).toString()=="NaN" ? "0.0" : "${(widget.movie?.rating?.toDouble() ?? 0) / (widget.movie?.userIdList?.length ?? 0)}"}"
+                                              (((widget.movie?.rating?.toDouble() ?? 0) / (widget.movie?.userIdList?.length ?? 0)).toString()=="NaN" ? "0.0" : "${(widget.movie?.rating?.toDouble() ?? 0) / (widget.movie?.userIdList?.length ?? 0)}")
                                                   .substring(0, 3),
                                               style: Style.inputStyle(
                                                   color: Style.whiteColor,
                                                   size: 20,
                                                   weight: FontWeight.w500),
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             SizedBox(
                                               width: 65.w,
                                               child: CustomSocialButton(
@@ -177,7 +176,7 @@ class _CommentsPageState extends State<CommentsPage>
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
-                                                      Icon(Icons.star_border,color: Style.whiteColor,size: 20,),
+                                                      const Icon(Icons.star_border,color: Style.whiteColor,size: 20,),
                                                       5.horizontalSpace,
                                                       Text(
                                                         "Rate",
@@ -256,7 +255,7 @@ class _CommentsPageState extends State<CommentsPage>
                         MaterialPageRoute(
                             builder: (_) => BlocProvider(
                                   create: (context) => AuthCubit(),
-                                  child: SignUpPage(),
+                                  child: const LoginPage(),
                                 )));
                   } else {
                     if (textController.text.isNotEmpty) {

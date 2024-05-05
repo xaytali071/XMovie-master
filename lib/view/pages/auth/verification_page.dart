@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sms_autofill/sms_autofill.dart';

@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:xmovie/view/components/button/custom_button.dart';
 import 'package:xmovie/view/components/form_field/custom_text_form_field.dart';
 import 'package:xmovie/view/components/form_field/keyboard_dissimer.dart';
@@ -41,7 +40,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomShapeButton(child: Icon(Icons.arrow_back,color: Style.whiteColor,), onTap: (){
+                      CustomShapeButton(child: const Icon(Icons.arrow_back,color: Style.whiteColor,), onTap: (){
                         Navigator.pop(context);
                       }),
                       Text("Change password", style: Style.normalStyle(),),
@@ -51,7 +50,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   100.verticalSpace,
                   CustomTextFormField(
                     hint: "Password",
-                    perfix: Icon(
+                    perfix: const Icon(
                       Icons.lock,
                       color: Style.greyColor,
                     ),
@@ -60,17 +59,17 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   50.verticalSpace,
                   CustomTextFormField(
                     hint: "Coniform password",
-                    perfix: Icon(
+                    perfix: const Icon(
                       Icons.lock_reset_rounded,
                       color: Style.greyColor,
                     ),
                     controller: coniformPassword,
                   ),
                   10.verticalSpace,
-                  state.pass ? SizedBox() : Text("Password incorrect",style: Style.inputStyle(color: Style.redColor),),
+                  state.pass ? const SizedBox() : Text("Password incorrect",style: Style.inputStyle(color: Style.redColor),),
                   70.verticalSpace,
                   state.isLoading
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
                       : CustomButton(
                           text: "Ok",
                           onTap: () {
@@ -84,7 +83,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                                         BlocProvider(create: (_)=>MovieCubit()),
                                         BlocProvider(create: (_)=>AuthCubit()),
                                       ],
-                                      child: BottomBar())), (route) => false);
+                                      child: const BottomBar())), (route) => false);
                             }
                             );
                           })

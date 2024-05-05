@@ -3,13 +3,13 @@ import 'package:xmovie/controller/movie_controller/movie_cubit.dart';
 import 'package:xmovie/controller/movie_controller/movie_state.dart';
 import 'package:xmovie/model/movie_model.dart';
 import 'package:xmovie/view/components/button/custom_shape_button.dart';
-import 'package:xmovie/view/components/cast_widget.dart';
+import 'package:xmovie/view/components/widgets/cast_widget.dart';
+import 'package:xmovie/view/components/widgets/scale_up_animation.dart';
 import 'package:xmovie/view/components/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xmovie/view/pages/home/video_page.dart';
-import 'package:http/http.dart' as http;
 
 class InMoviePage extends StatefulWidget {
   final MovieModel movie;
@@ -33,7 +33,7 @@ class _InMoviePageState extends State<InMoviePage> {
     context.read<MovieCubit>().playVideo(false);
     context
         .read<MovieCubit>()
-        .getCast(docId: widget.docId, collectionName: widget.collectionName);
+        .getCastMovie(docId: widget.docId, collectionName: widget.collectionName);
     super.initState();
   }
 
@@ -59,27 +59,33 @@ class _InMoviePageState extends State<InMoviePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomShapeButton(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Icon(
-                              Icons.arrow_back,
-                              color: Style.whiteColor,
-                            )),
+                        ScaleUpAnimation(
+                          duration: const Duration(milliseconds: 1500),
+                          child: CustomShapeButton(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Icon(
+                                Icons.arrow_back,
+                                color: Style.whiteColor,
+                              )),
+                        ),
                         230.horizontalSpace,
-                        CustomShapeButton(
-                            onTap: () async {
-                              AppConst().dynamicLink(
-                                  name: widget.movie.name ?? "",
-                                  image: widget.movie.image ?? "",
-                                  title:
-                                      "${widget.movie.production} ${widget.movie.director}");
-                            },
-                            child: const Icon(
-                              Icons.share,
-                              color: Style.whiteColor,
-                            )),
+                        ScaleUpAnimation(
+                          duration: const Duration(milliseconds: 1500),
+                          child: CustomShapeButton(
+                              onTap: () async {
+                                AppConst().dynamicLink(
+                                    name: widget.movie.name ?? "",
+                                    image: widget.movie.image ?? "",
+                                    title:
+                                        "${widget.movie.production} ${widget.movie.director}");
+                              },
+                              child: const Icon(
+                                Icons.share,
+                                color: Style.whiteColor,
+                              )),
+                        ),
                       ],
                     ),
                   ),
@@ -183,25 +189,25 @@ class _InMoviePageState extends State<InMoviePage> {
                   top: 200.h,
                   left: 100.w,
                   right: 100.w,
-                  child: AnimatedSize(
-                      curve: Curves.easeInOut,
-                      duration: const Duration(milliseconds: 1500),
-                      child: CustomShapeButton(
+                  child: ScaleUpAnimation(
+                    duration: const Duration(milliseconds: 1200),
+                    child: CustomShapeButton(
+                      size: state.size ? 0 : 80,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => VideoPage(
+                                      videoUrl: widget.movie.videoUrl ?? "",
+                                    )));
+                      },
+                      child: Icon(
+                        Icons.play_arrow_rounded,
+                        color: Style.whiteColor,
                         size: state.size ? 0 : 80,
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => VideoPage(
-                                        videoUrl: widget.movie.videoUrl ?? "",
-                                      )));
-                        },
-                        child: Icon(
-                          Icons.play_arrow_rounded,
-                          color: Style.whiteColor,
-                          size: state.size ? 0 : 80,
-                        ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

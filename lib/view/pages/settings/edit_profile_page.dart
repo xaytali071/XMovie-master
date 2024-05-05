@@ -1,6 +1,6 @@
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:xmovie/view/components/button/custom_button.dart';
 import 'package:xmovie/view/components/form_field/custom_text_form_field.dart';
 import 'package:xmovie/view/components/form_field/keyboard_dissimer.dart';
@@ -50,7 +50,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomShapeButton(child: Icon(Icons.arrow_back,color: Style.whiteColor,), onTap: (){
+                      CustomShapeButton(child: const Icon(Icons.arrow_back,color: Style.whiteColor,), onTap: (){
                         Navigator.pop(context);
                       }),
                       Text("Edit profile", style: Style.normalStyle(),),
@@ -64,7 +64,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     borderColor:  Style.transperntcolor,
                     hint: "Firstname",
                     controller: firstName,
-                    perfix: Icon(
+                    perfix: const Icon(
                       Icons.person,
                       color: Style.greyColor,
                     ),
@@ -73,13 +73,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   CustomTextFormField(
                     hint: "Lastname",
                     controller: lastName,
-                    perfix: Icon(
+                    perfix: const Icon(
                       Icons.person,
                       color: Style.greyColor,
                     ),
                   ),
                   70.verticalSpace,
-                  state.isLoading ? CircularProgressIndicator() :
+                  state.isLoading ? const CircularProgressIndicator() :
                   CustomButton(
                       text: "Next",
                       onTap: () async {
@@ -98,7 +98,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                              BlocProvider(create: (_)=>MovieCubit()),
                                              BlocProvider(create: (_)=>AuthCubit()),
                                            ],
-                                           child: BottomBar())), (route) => false);
+                                           child: const BottomBar())), (route) => false);
                                      }
                                  );
                                }
@@ -108,7 +108,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                      BlocProvider(create: (_)=>MovieCubit()),
                                      BlocProvider(create: (_)=>AuthCubit()),
                                    ],
-                                   child: BottomBar())), (route) => false);
+                                   child: const BottomBar())), (route) => false);
                              });
                       })
                 ],

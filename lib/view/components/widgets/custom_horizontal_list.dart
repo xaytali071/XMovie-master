@@ -1,13 +1,13 @@
 import 'package:xmovie/controller/movie_controller/movie_cubit.dart';
 import 'package:xmovie/view/components/button/button_effect.dart';
 import 'package:xmovie/view/components/images/custom_network_image.dart';
-import 'package:xmovie/view/components/type_widget.dart';
+import 'package:xmovie/view/components/widgets/type_widget.dart';
 import 'package:xmovie/view/pages/home/in_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../model/movie_model.dart';
+import '../../../model/movie_model.dart';
 
 class CustomHorizontalList extends StatelessWidget {
   final List<MovieModel>? list;
@@ -22,7 +22,7 @@ class CustomHorizontalList extends StatelessWidget {
       height: 130.h,
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: list?.length ?? 0,
+          itemCount: list?.length ?? 4,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return GestureDetector(

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +33,7 @@ class _CheckPasswordDialogState extends State<CheckPasswordDialog> {
             decoration: BoxDecoration(
                 color: Style.primaryColor,
                 borderRadius: BorderRadius.circular(10.r),
-                image: DecorationImage(
+                image: const DecorationImage(
                     image: AssetImage("assets/Background.png"),
                     fit: BoxFit.cover)),
             child: Column(
@@ -48,7 +47,7 @@ class _CheckPasswordDialogState extends State<CheckPasswordDialog> {
                 30.verticalSpace,
                 CustomTextFormField(
                   hint: "Password",
-                  perfix: Icon(
+                  perfix: const Icon(
                     Icons.lock,
                     color: Style.greyColor,
                   ),
@@ -56,7 +55,7 @@ class _CheckPasswordDialogState extends State<CheckPasswordDialog> {
                 ),
                 10.verticalSpace,
                 state.pass
-                    ? SizedBox() :Text(
+                    ? const SizedBox() :Text(
                         "Password incorrect",
                         style: Style.miniStyle(color: Style.redColor),
                       ),
@@ -65,7 +64,7 @@ class _CheckPasswordDialogState extends State<CheckPasswordDialog> {
                   context.read<AuthCubit>().checkPassword(check:password.text == widget.oldPassword,onSuccess: (){
                       Navigator.push(context, MaterialPageRoute(builder: (_)=>BlocProvider(
   create: (context) => AuthCubit(),
-  child: EditPasswordPage(),
+  child: const EditPasswordPage(),
 )));
 
                   });

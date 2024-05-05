@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/movie_model.dart';
 import '../components/button/button_effect.dart';
 import '../components/images/custom_network_image.dart';
-import '../components/type_widget.dart';
+import '../components/widgets/type_widget.dart';
 import 'home/in_movie.dart';
 
 class SearchResultPage extends StatelessWidget {

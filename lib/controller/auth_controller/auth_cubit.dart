@@ -7,11 +7,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:xmovie/model/feedback_model.dart';
 import 'package:xmovie/model/message_model.dart';
+import 'package:xmovie/view/components/style.dart';
 
 import '../../model/local_storage.dart';
 import '../../model/user_model.dart';
@@ -44,7 +46,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(state.copyWith(isLoading: true, errorText: null));
     if (await checkPhone(phone)) {
       emit(state.copyWith(
-          errorText: "Bu raqamga avval hisob ochilgan", isLoading: false));
+          errorText: "An account has already been opened to this number", isLoading: false));
     } else {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phone,
@@ -67,6 +69,33 @@ class AuthCubit extends Cubit<AuthState> {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     }
+  }
+
+  login({required String phone,required String password,VoidCallback? onSuccess}) async {
+    emit(state.copyWith(errorText: "",isLoading: true));
+    try {
+      var res = await firestore
+          .collection("users")
+          .where("phone", isEqualTo: phone)
+          .get();
+      if (res.docs.first["password"] == password) {
+        LocaleStore.setId(res.docs.first.id);
+        onSuccess?.call();
+        emit(state.copyWith(isLoading: false));
+      } else {
+        emit(state.copyWith(errorText:"The password may be incorrect or not registered with such a number" ,isLoading: false));
+
+      }
+    } catch (e) {
+      emit(state.copyWith(errorText: "The password may be incorrect or not registered with such a number",isLoading: false));
+    }
+  }
+
+  updateFcm(String fcm,VoidCallback onSuccess) async {
+    emit(state.copyWith(isLoading: true));
+    firestore.collection("users").doc(await LocaleStore.getId()).update({"fcmToken":fcm});
+    emit(state.copyWith(isLoading: false));
+onSuccess.call();
   }
 
   sendOtp({required String email}) async {
@@ -108,7 +137,7 @@ class AuthCubit extends Cubit<AuthState> {
       final storageRef = FirebaseStorage.instance
           .ref()
           .child("userImage/${DateTime.now().toString()}");
-      await storageRef.putFile(File(avatar ?? ""));
+      await storageRef.putFile(File(avatar));
       String url = await storageRef.getDownloadURL();
       emit(state.copyWith(
           userModel: UserModel(
@@ -116,7 +145,7 @@ class AuthCubit extends Cubit<AuthState> {
               lastName: lastName,
               password: password,
               email: email,
-              avatar: url ?? "",
+              avatar: url,
               fcmToken: fcmToken,
               phoneModel: phoneModel,
               phone: phone)));
@@ -141,7 +170,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       PhoneAuthCredential _credential = PhoneAuthProvider.credential(
           verificationId: state.verificationId, smsCode: code);
-
+      if (kDebugMode) {
+        print(_credential);
+      }
       emit(state.copyWith(isLoading: false));
 
       onSuccess();
@@ -167,9 +198,7 @@ class AuthCubit extends Cubit<AuthState> {
         ).toJson())
         .then((value) async {
       await LocaleStore.setId(value.id);
-      if (kDebugMode) {
-        print("object 5");
-      }
+
       onSuccess();
     });
   }
@@ -335,7 +364,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   getImageGallery(VoidCallback onSuccess) async {
-    await image.pickImage(source: ImageSource.gallery).then((value) async {
+    await image.pickImage(source: ImageSource.gallery,imageQuality: 65).then((value) async {
       if (value != null) {
         CroppedFile? cropperImage =
             await ImageCropper().cropImage(sourcePath: value.path);
@@ -378,11 +407,15 @@ class AuthCubit extends Cubit<AuthState> {
             time: DateTime.now())
         .toJson());
     emit(state.copyWith(isLoading: false));
+    Fluttertoast.showToast(msg: "Success",
+    backgroundColor: Style.greenColor,
+    gravity: ToastGravity.CENTER
+    );
   }
 
   getMessages() async {
     emit(state.copyWith(isLoading: true));
-    var res = await firestore
+    var res = firestore
         .collection("users")
         .doc(LocaleStore.getId())
         .collection("messages").snapshots().listen((res) {
@@ -402,5 +435,10 @@ class AuthCubit extends Cubit<AuthState> {
         .collection("users")
         .doc(LocaleStore.getId())
         .collection("messages").doc(messageDocId).update({"isRead":true});
+  }
+
+  logOut(VoidCallback onSuccess){
+    LocaleStore.storeClear();
+    onSuccess.call();
   }
 }

@@ -1,25 +1,21 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+import 'package:vibration/vibration.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
 import 'package:xmovie/controller/movie_controller/movie_cubit.dart';
 import 'package:xmovie/controller/movie_controller/movie_state.dart';
 import 'package:xmovie/model/local_storage.dart';
-import 'package:xmovie/view/components/custom_horizontal_list.dart';
+import 'package:xmovie/view/components/widgets/custom_horizontal_list.dart';
 import 'package:xmovie/view/components/images/avatar_image.dart';
-import 'package:xmovie/view/components/images/custom_network_image.dart';
-import 'package:xmovie/view/components/notification_widget.dart';
-import 'package:xmovie/view/components/shimmer_loading.dart';
-import 'package:xmovie/view/pages/auth/sign_up_page.dart';
+import 'package:xmovie/view/components/widgets/notification_widget.dart';
+import 'package:xmovie/view/pages/auth/login_page.dart';
 import 'package:xmovie/view/pages/home/messages_page.dart';
 import 'package:xmovie/view/pages/search_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import '../../components/back_ground_widget.dart';
+import '../../components/widgets/back_ground_widget.dart';
 import '../../components/form_field/custom_text_form_field.dart';
 import '../../components/form_field/keyboard_dissimer.dart';
 import '../../components/style.dart';
@@ -95,12 +91,12 @@ class _HomePageState extends State<HomePage> {
                                   MaterialPageRoute(
                                       builder: (_) => BlocProvider(
                                             create: (context) => AuthCubit(),
-                                            child: SignUpPage(),
+                                            child: const LoginPage(),
                                           )));
                             },
                             child: Text(
                               "Sign in",
-                              style: Style.hintStyle(color: Style.whiteColor),
+                              style: Style.hintStyle(color: Style.pinkColor),
                             ))
                         : Row(
                             children: [
@@ -123,8 +119,8 @@ class _HomePageState extends State<HomePage> {
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                   )),
-                              Spacer(),
-                              NotificationWidget(count: state.messageCount ?? 0, onTap: () { 
+                              const Spacer(),
+                              NotificationWidget(count: state.messageCount ?? 0, onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (_)=>BlocProvider(
   create: (context) => AuthCubit(),
   child: MessagesPage(listOfMessage: state.listOfMessage ?? [],),
@@ -155,8 +151,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     sufix: GestureDetector(
                         onLongPressStart: (s) {
+                          Vibration.vibrate(duration: 30,);
                           _startListening();
-                          Vibrate.feedback(FeedbackType.light);
                         },
                         onLongPressEnd: (d) {
                           if (_lastWords.isNotEmpty) {
@@ -165,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                                     _lastWords[0].toUpperCase()));
                           }
                           _stopListening();
-                          Vibrate.feedback(FeedbackType.light);
+
                         },
                         child: const Icon(
                           Icons.mic,
@@ -211,16 +207,10 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         20.horizontalSpace,
-                        InkWell(
-                            onTap: () async {
-                              DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-                              AndroidDeviceInfo androidInfo =
-                                  await deviceInfo.androidInfo;
-                            },
-                            child: Text(
-                              "Series",
-                              style: Style.hintStyle(color: Style.whiteColor),
-                            )),
+                        Text(
+                          "Series",
+                          style: Style.hintStyle(color: Style.whiteColor),
+                        ),
                       ],
                     ),
                     10.verticalSpace,

@@ -16,7 +16,7 @@ class NotificationWidget extends StatelessWidget {
         height: 35.h,
         child: Stack(
           children: [
-            Icon(
+            const Icon(
               Icons.notifications,
               color: Style.whiteColor,
               size: 30,
@@ -24,10 +24,10 @@ class NotificationWidget extends StatelessWidget {
             Positioned(
               right: 8.w,
               top: 0.h,
-              child: count==0 ? SizedBox.shrink() : Container(
+              child: count==0 ? const SizedBox.shrink() : Container(
                 width: 15.w,
                 height: 15.h,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Style.redColor,
                 ),

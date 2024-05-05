@@ -7,7 +7,6 @@ import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/movie_controller/movie_cubit.dart';
 import 'package:xmovie/view/components/button/custom_shape_button.dart';
 import 'package:xmovie/view/components/style.dart';
-import 'package:xmovie/view/pages/auth/sign_up_page.dart';
 import 'package:xmovie/view/pages/chats/chats_page.dart';
 import 'package:xmovie/view/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,6 @@ class _BottomBarState extends State<BottomBar> {
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Notification received while app is in foreground: $message");
     });
 
     AwesomeNotifications().isNotificationAllowed().then((isAllowed){

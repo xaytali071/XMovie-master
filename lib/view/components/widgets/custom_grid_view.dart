@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../model/rating_model.dart';
+import '../../../model/rating_model.dart';
 
 class CustomGridwView extends StatelessWidget {
   final List<RatinByMovieModel>? listOfMovie;
@@ -15,7 +15,7 @@ class CustomGridwView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, mainAxisExtent: 140.h),
         shrinkWrap: true,

@@ -2,7 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:xmovie/controller/app_controller/app_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:xmovie/view/components/button/custom_button.dart';
 import 'package:xmovie/view/components/button/custom_social_button.dart';
 import 'package:xmovie/view/components/form_field/custom_text_form_field.dart';
@@ -68,7 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
                      CustomTextFormField(
                       hint: "Phone",
                       controller: phoneController,
-                      perfix: Icon(
+                      perfix: const Icon(
                         Icons.phone,
                         color: Style.greyColor,
                       ),

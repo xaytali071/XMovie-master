@@ -15,7 +15,7 @@ class CustomShimmerLoading extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding:  EdgeInsets.symmetric(vertical: 5.h,horizontal: 5.w),
-            child: ShimmerItem(height: 140, width: 130, radius: 10),
+            child: const ShimmerItem(height: 140, width: 130, radius: 10),
           );
         });
   }

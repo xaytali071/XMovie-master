@@ -2,7 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:xmovie/view/components/button/custom_button.dart';
 import 'package:xmovie/view/components/form_field/custom_text_form_field.dart';
 import 'package:xmovie/view/components/form_field/keyboard_dissimer.dart';
@@ -49,7 +49,7 @@ class _SetBioPageState extends State<SetBioPage> {
                      CustomTextFormField(
                       hint: "Firstname",
                       controller: firstName,
-                      perfix: Icon(
+                      perfix: const Icon(
                         Icons.person,
                         color: Style.greyColor,
                       ),
@@ -58,7 +58,7 @@ class _SetBioPageState extends State<SetBioPage> {
                      CustomTextFormField(
                       hint: "Lastname",
                       controller: lastName,
-                      perfix: Icon(
+                      perfix: const Icon(
                         Icons.person,
                         color: Style.greyColor,
                       ),
@@ -67,7 +67,7 @@ class _SetBioPageState extends State<SetBioPage> {
                      CustomTextFormField(
                       hint: "Email",
                       controller: email,
-                      perfix: Icon(
+                      perfix: const Icon(
                         Icons.email,
                         color: Style.greyColor,
                       ),
@@ -78,7 +78,7 @@ class _SetBioPageState extends State<SetBioPage> {
                       hint: "Password",
                       controller: password,
                       obscure: state.hidePassword,
-                      perfix: Icon(
+                      perfix: const Icon(
                         Icons.lock,
                         color: Style.greyColor,
                       ),
@@ -86,10 +86,10 @@ class _SetBioPageState extends State<SetBioPage> {
                            onTap: (){
                              context.read<AuthCubit>().hidePassword();
                            },
-                           child: state.hidePassword ? Icon(Icons.visibility_off,color: Style.greyColor,) : Icon(Icons.remove_red_eye,color: Style.greyColor,)),
+                           child: state.hidePassword ? const Icon(Icons.visibility_off,color: Style.greyColor,) : const Icon(Icons.remove_red_eye,color: Style.greyColor,)),
                     ),
                     70.verticalSpace,
-                    state.isLoading ? CircularProgressIndicator() :
+                    state.isLoading ? const CircularProgressIndicator() :
                     CustomButton(
                         text: "Next",
                         onTap: () async {
@@ -118,7 +118,7 @@ class _SetBioPageState extends State<SetBioPage> {
                                                 BlocProvider(create: (_)=>MovieCubit()),
                                                 BlocProvider(create: (_)=>AuthCubit())
                                               ],
-                                              child: BottomBar())), (
+                                              child: const BottomBar())), (
                                           route) => false);
                                 });
                               }

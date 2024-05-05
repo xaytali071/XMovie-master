@@ -8,7 +8,8 @@ class MessageWidget extends StatelessWidget {
   final String title;
   final String body;
   final String time;
-  const MessageWidget({super.key, required this.image, required this.title, required this.body, required this.time});
+  final bool isRead;
+  const MessageWidget({super.key, required this.image, required this.title, required this.body, required this.time, required this.isRead});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,9 @@ class MessageWidget extends StatelessWidget {
             children: [
               Padding(
                 padding:  EdgeInsets.all(5.r),
-                child: Text(title,style: Style.inputStyle(color: Style.whiteColor),maxLines: 2,overflow: TextOverflow.ellipsis,),
+                child: SizedBox(
+                    width: 350.w,
+                    child: Text(title,style: Style.inputStyle(color: Style.whiteColor),maxLines: 2,overflow: TextOverflow.ellipsis,)),
               ),
               image=="" ? SizedBox(
                 width: MediaQuery.sizeOf(context).width,
@@ -34,12 +37,16 @@ class MessageWidget extends StatelessWidget {
               CustomImageNetwork(image:image,height: 150,radius: 0,),
               Padding(
                 padding:  EdgeInsets.all(5.r),
-                child: Text(body,style: Style.miniStyle(color: Style.greyColor),maxLines: 2,overflow: TextOverflow.ellipsis,),
+                child: SizedBox(
+                    width: 350.w,
+                    child: Text(body,style: Style.miniStyle(color: Style.greyColor),maxLines: 2,overflow: TextOverflow.ellipsis,)),
               ),
               10.verticalSpace,
             ],
           ),
-
+          Positioned(
+              right: 0,
+              child: isRead ? SizedBox.shrink() : Icon(Icons.circle,color: Style.redColor,size: 10.r,) ),
           Positioned(
               bottom: 3,
               right: 7,

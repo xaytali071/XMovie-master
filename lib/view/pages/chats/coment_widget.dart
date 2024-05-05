@@ -31,7 +31,7 @@ class ComentWidget extends StatelessWidget {
                   image==null || image=="" ? Container(
                     width: 30.w,
                     height: 30.h,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Style.greyColor
                     ),

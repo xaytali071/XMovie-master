@@ -21,8 +21,8 @@ class CustomRatingBar extends StatelessWidget {
             itemCount: 5,
             tapOnlyMode: true,
             updateOnDrag: true,
-            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => Icon(
+            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,
             ),

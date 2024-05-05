@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:xmovie/view/components/button/custom_button.dart';
 import 'package:xmovie/view/components/button/custom_shape_button.dart';
 import 'package:xmovie/view/components/form_field/custom_text_form_field.dart';
@@ -39,7 +39,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomShapeButton(child: Icon(Icons.arrow_back,color: Style.whiteColor,), onTap: (){
+                      CustomShapeButton(child: const Icon(Icons.arrow_back,color: Style.whiteColor,), onTap: (){
                         Navigator.pop(context);
                       }),
                       Column(
@@ -51,7 +51,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       40.horizontalSpace,
                     ],
                   ),
-          100.verticalSpace,
+          50.verticalSpace,
+                  Text("Please write about your questions and errors",style: Style.inputStyle(color: Style.whiteColor),),
+                  50.verticalSpace,
                   CustomTextFormField(
                     onChanged: (s){
                       context.read<AuthCubit>().check(check: title.text.isEmpty);
@@ -60,7 +62,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     hint: "Type here",controller: title,heigth: 200, maxLine: 30,),
                   50.verticalSpace,
           
-                  state.isLoading ? CircularProgressIndicator() : state.check ? SizedBox.shrink() :
+                  state.isLoading ? const CircularProgressIndicator() : state.check ? const SizedBox.shrink() :
                   CustomButton(text: "Send", onTap: () {
                     context.read<AuthCubit>().sendFeedback(title:title.text);
                     title.clear();

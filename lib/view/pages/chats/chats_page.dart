@@ -3,11 +3,11 @@ import 'package:xmovie/controller/movie_controller/movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xmovie/view/components/shimmer_loading.dart';
+import 'package:xmovie/view/components/widgets/shimmer_loading.dart';
 import 'package:xmovie/view/components/style.dart';
 
-import '../../components/back_ground_widget.dart';
-import '../../components/custom_grid_view.dart';
+import '../../components/widgets/back_ground_widget.dart';
+import '../../components/widgets/custom_grid_view.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({super.key});
@@ -36,7 +36,7 @@ class _ChatsPageState extends State<ChatsPage> {
                     children: [
                       Text("Movie by rating",style: Style.normalStyle(),),
                       10.verticalSpace,
-                      state.isLoading ? CustomShimmerLoading() :
+                      state.isLoading ? const CustomShimmerLoading() :
                       CustomGridwView(listOfMovie:state.listOfRatingByMovie ?? [],listOfDoc: state.listOfRatingDocId,),
                       80.verticalSpace,
                     ]

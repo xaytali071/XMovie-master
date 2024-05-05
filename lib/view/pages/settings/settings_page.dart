@@ -5,21 +5,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:xmovie/controller/auth_controller/auth_cubit.dart';
 import 'package:xmovie/controller/auth_controller/auth_state.dart';
 import 'package:xmovie/model/local_storage.dart';
-import 'package:xmovie/view/components/back_ground_widget.dart';
+import 'package:xmovie/view/components/widgets/back_ground_widget.dart';
 import 'package:xmovie/view/components/button/custom_social_button.dart';
-import 'package:xmovie/view/components/delete_account_dialog.dart';
+import 'package:xmovie/view/components/dialog/delete_account_dialog.dart';
 import 'package:xmovie/view/components/images/avatar_image.dart';
-import 'package:xmovie/view/components/social_media.dart';
+import 'package:xmovie/view/components/widgets/social_media.dart';
 import 'package:xmovie/view/components/style.dart';
-import 'package:xmovie/view/components/check_password_dialog.dart';
-import 'package:xmovie/view/pages/bottom_navigation_bar.dart';
+import 'package:xmovie/view/components/dialog/check_password_dialog.dart';
+import 'package:xmovie/view/pages/auth/login_page.dart';
 import 'package:xmovie/view/pages/settings/about_page.dart';
 import 'package:xmovie/view/pages/settings/edit_profile_page.dart';
 import 'package:xmovie/view/pages/settings/feedback_page.dart';
-
-import '../../../controller/app_controller/app_cubit.dart';
-import '../../../controller/movie_controller/movie_cubit.dart';
-import '../auth/sign_up_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -35,7 +31,10 @@ class SettingsPage extends StatelessWidget {
               child: Column(
                 children: [
                   10.verticalSpace,
-                  Text("Settings",style: Style.normalStyle(),),
+                  Text(
+                    "Settings",
+                    style: Style.normalStyle(),
+                  ),
                   10.verticalSpace,
                   Container(
                       width: MediaQuery.sizeOf(context).width,
@@ -75,7 +74,7 @@ class SettingsPage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 10.w, right: 8.w),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.edit,
                             color: Style.greyColor,
                           ),
@@ -84,7 +83,7 @@ class SettingsPage extends StatelessWidget {
                             "Edit profile",
                             style: Style.hintStyle(),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Icon(
                             Icons.arrow_forward_ios,
                             color: Style.greyColor,
@@ -100,7 +99,7 @@ class SettingsPage extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (_) => BlocProvider(
                                       create: (context) => AuthCubit(),
-                                      child: SignUpPage(),
+                                      child: const LoginPage(),
                                     )));
                       } else {
                         Navigator.push(
@@ -109,8 +108,10 @@ class SettingsPage extends StatelessWidget {
                                 builder: (_) => BlocProvider(
                                       create: (context) => AuthCubit(),
                                       child: EditProfilePage(
-                                        firsName: state.userModel?.firstName ?? "",
-                                        lastName: state.userModel?.lastName ?? '',
+                                        firsName:
+                                            state.userModel?.firstName ?? "",
+                                        lastName:
+                                            state.userModel?.lastName ?? '',
                                       ),
                                     )));
                       }
@@ -124,7 +125,7 @@ class SettingsPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.key,
                             color: Style.greyColor,
                           ),
@@ -133,7 +134,7 @@ class SettingsPage extends StatelessWidget {
                             "Change password",
                             style: Style.hintStyle(),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Icon(
                             Icons.arrow_forward_ios,
                             color: Style.greyColor,
@@ -149,7 +150,7 @@ class SettingsPage extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (_) => BlocProvider(
                                       create: (context) => AuthCubit(),
-                                      child: SignUpPage(),
+                                      child: const LoginPage(),
                                     )));
                       } else {
                         showDialog(
@@ -159,7 +160,8 @@ class SettingsPage extends StatelessWidget {
                                 create: (context) => AuthCubit(),
                                 child: Dialog(
                                   child: CheckPasswordDialog(
-                                    oldPassword: state.userModel?.password ?? "",
+                                    oldPassword:
+                                        state.userModel?.password ?? "",
                                   ),
                                 ),
                               );
@@ -184,7 +186,7 @@ class SettingsPage extends StatelessWidget {
                               "Feedback",
                               style: Style.hintStyle(),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Icon(
                               Icons.arrow_forward_ios,
                               color: Style.greyColor,
@@ -200,7 +202,7 @@ class SettingsPage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (_) => BlocProvider(
                                         create: (context) => AuthCubit(),
-                                        child: SignUpPage(),
+                                        child: const LoginPage(),
                                       )));
                         } else {
                           Navigator.push(
@@ -208,7 +210,7 @@ class SettingsPage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (_) => BlocProvider(
                                         create: (context) => AuthCubit(),
-                                        child: FeedbackPage(),
+                                        child: const FeedbackPage(),
                                       )));
                         }
                       }),
@@ -220,7 +222,7 @@ class SettingsPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.insert_drive_file_rounded,
                             color: Style.greyColor,
                           ),
@@ -229,7 +231,7 @@ class SettingsPage extends StatelessWidget {
                             "About",
                             style: Style.hintStyle(),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Icon(
                             Icons.arrow_forward_ios,
                             color: Style.greyColor,
@@ -239,7 +241,8 @@ class SettingsPage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>AboutPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => const AboutPage()));
                     },
                   ),
                   20.verticalSpace,
@@ -250,7 +253,55 @@ class SettingsPage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            const Icon(
+                              Icons.logout,
+                              color: Style.greyColor,
+                            ),
+                            15.horizontalSpace,
+                            Text(
+                              "Log out",
+                              style: Style.hintStyle(),
+                            ),
+                            const Spacer(),
                             Icon(
+                              Icons.arrow_forward_ios,
+                              color: Style.greyColor,
+                              size: 15.r,
+                            )
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        if (LocaleStore.getId() == null) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocProvider(
+                                    create: (context) => AuthCubit(),
+                                    child: const LoginPage(),
+                                  )));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  child: BlocProvider(
+                                    create: (context) => AuthCubit(),
+                                    child: const LogOutDialog(),
+                                  ),
+                                );
+                              });
+                        }
+                      }),
+                  20.verticalSpace,
+                  CustomSocialButton(
+                      height: 35,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.w, right: 8.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Icon(
                               Icons.delete,
                               color: Style.greyColor,
                             ),
@@ -259,7 +310,7 @@ class SettingsPage extends StatelessWidget {
                               "Delete account",
                               style: Style.hintStyle(),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Icon(
                               Icons.arrow_forward_ios,
                               color: Style.greyColor,
@@ -275,7 +326,7 @@ class SettingsPage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (_) => BlocProvider(
                                         create: (context) => AuthCubit(),
-                                        child: SignUpPage(),
+                                        child: const LoginPage(),
                                       )));
                         } else {
                           showDialog(
@@ -284,14 +335,15 @@ class SettingsPage extends StatelessWidget {
                                 return Dialog(
                                   child: BlocProvider(
                                     create: (context) => AuthCubit(),
-                                    child: DeleteAccountDialog(),
+                                    child: const DeleteAccountDialog(),
                                   ),
                                 );
                               });
                         }
                       }),
                   20.verticalSpace,
-                  CustomSocialMedia()
+                  const CustomSocialMedia(),
+                  100.verticalSpace,
                 ],
               ),
             ),
